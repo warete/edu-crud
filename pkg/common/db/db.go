@@ -10,8 +10,8 @@ type Connection struct {
 	DB *sql.DB
 }
 
-func Init() (*Connection, error) {
-	db, err := initSqlite()
+func Init(dbPath string) (*Connection, error) {
+	db, err := initSqlite(dbPath)
 
 	if err != nil {
 		return &Connection{}, err
@@ -24,8 +24,8 @@ func Init() (*Connection, error) {
 	return ConnectionInstance, nil
 }
 
-func initSqlite() (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", "./db.db")
+func initSqlite(dbPath string) (*sql.DB, error) {
+	db, err := sql.Open("sqlite3", dbPath)
 
 	if err != nil {
 		return nil, err
